@@ -1,7 +1,5 @@
 """Simple web crawler"""
-import os
 import logging
-import json
 import requests
 from typing import List
 from tqdm import tqdm
@@ -125,9 +123,6 @@ def crawl(start_url):
 
         pbar.update(1)
     pbar.close()
-    
-    with open('./visited_urls.json', 'w') as f:
-        json.dump(list(visited), f)
 
 
 if __name__ == '__main__':
