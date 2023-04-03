@@ -29,3 +29,5 @@ To github.com:habaneraa/bit-qa-plus.git
 branch 'yidi_first_merge_request' set up to track 'origin/yidi_first_merge_request'.
 ```
 
+进入链接后创建pull request，然后Enjoy！
+
