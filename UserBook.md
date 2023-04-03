@@ -31,3 +31,8 @@ branch 'yidi_first_merge_request' set up to track 'origin/yidi_first_merge_reque
 
 进入链接后创建pull request，然后Enjoy！
 
+# 技术方案
+
+- [LangChain](https://python.langchain.com/en/latest/index.html)
+- [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/). [A blog by the creator of LlamaIndex](https://medium.com/@jerryjliu98/how-unstructured-and-llamaindex-can-help-bring-the-power-of-llms-to-your-own-data-3657d063e30d)
+- [Multilingual embedding model from Cohere](https://txt.cohere.ai/multilingual/), [integrated by LangChain](https://python.langchain.com/en/latest/modules/models/text_embedding/examples/cohere.html)
