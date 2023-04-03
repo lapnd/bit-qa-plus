@@ -23,7 +23,7 @@ seed_name = 'bit.edu.cn'
 non_html_exts = set([
     'exe', 'apk', 'rar', 'zip', '7z', 'tgz',
     'png', 'jpeg', 'jpg', 'gif', 'mp3', 'mp4', 'mov', 'mpeg', 'avi', 'tif', '3gp', 'swf', 'wmv',
-    'ai', 'dwg', 'vcf',
+    'ai', 'dwg', 'vcf', 'txt',
     'pptx', 'ppt', 'xls', 'xlsx', 'docx', 'doc', 'pdf', 'wps', 'pps', 'rtf','pptx',
     'eml', 'mht',
 ])
