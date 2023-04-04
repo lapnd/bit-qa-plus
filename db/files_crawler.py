@@ -30,21 +30,21 @@ user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 visited = set()
 
 
-def retry(wait_sec, retries):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            for i in range(retries):
-                try:
-                    return func(*args, **kwargs)
-                except:
-                    time.sleep(wait_sec)
-            return func(*args, **kwargs)
-        return wrapper
-    return decorator
+# def retry(wait_sec, retries):
+#     def decorator(func):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             for i in range(retries):
+#                 try:
+#                     return func(*args, **kwargs)
+#                 except:
+#                     time.sleep(wait_sec)
+#             return func(*args, **kwargs)
+#         return wrapper
+#     return decorator
 
 
-@retry(5, 5)
+# @retry(5, 5)
 def http_get(url):
     try:
         response = requests.get(url, headers={'User-Agent': user_agent}, timeout=10)
@@ -58,6 +58,11 @@ def http_get(url):
             logger.info(f'Fail({type(e).__name__}): {url}')
     return None
 
+
+def get_ext(url: str):
+    parse_result = parse.urlparse(url)._replace(fragment='')
+    url = url_normalize(parse_result.geturl())
+    return url.split('.')[-1].lower()
 
 def is_file_url(url: str):
     if url is None or len(url) == 0:
@@ -104,7 +109,7 @@ def get_files(url: str) -> List[dict]:
     return files
 
 
-def main(from_path='./db/urls-0402.json', save_path='./db/file_urls.json'):
+def main(from_path='./db/urls-0402.json', save_path='./db/filelinks.json'):
     with open(from_path, 'r') as f:
         urls = json.loads(f.read())
 
@@ -116,8 +121,20 @@ def main(from_path='./db/urls-0402.json', save_path='./db/file_urls.json'):
     for f in results:
         all_files.extend(f)
     
+    print(len(all_files))
+    tuple_set = set()
+    unique_filelinks = []
+    for f in all_files:
+        id = f['name']+' : '+f['url']+' : '+f['from']
+        if id in tuple_set:
+            continue
+        tuple_set.add(id)
+        f['format'] = get_ext(f['url'])
+        unique_filelinks.append(f)
+    print(len(unique_filelinks))
+    
     with open(save_path, 'w') as f:
-        json.dump(all_files, f, indent=2)
+        json.dump(unique_filelinks, f, indent=4)
 
 
 if __name__ == '__main__':
